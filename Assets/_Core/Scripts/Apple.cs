@@ -18,7 +18,7 @@ public class Apple : MonoBehaviour
 
         if (lifeTime >= FruitData.LifeTime)
         {
-            DestroyFruit();
+            ReleaseFruit();
         }
     }
     
@@ -33,10 +33,13 @@ public class Apple : MonoBehaviour
         rb.AddForce(direction * force, ForceMode.Impulse);
     }
 
-    private void DestroyFruit()
+    private void ReleaseFruit()
     {
-        Debug.Log("Destroying Fruit");
+        // Debug.Log("Releasing Fruit");
         OnAppleDestroyed?.Invoke(this);
-        Destroy(gameObject);
+        
+        lifeTime = 0;
+        rb.isKinematic = false;
+        view.gameObject.SetActive(true);
     }
 }

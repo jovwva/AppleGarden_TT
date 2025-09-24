@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.root.TryGetComponent(out Apple apple))
+        if (other.transform.TryGetComponent(out FruitRooter apple))
         {
-            if (backpack.AddFruit(apple))
+            if (backpack.AddFruit(apple.RootApple))
             {
-                apple.Collect();
-                apple.OnAppleDestroyed += OnAppleDestroyed;
+                apple.RootApple.Collect();
+                apple.RootApple.OnAppleDestroyed += OnAppleDestroyed;
             }
             else
             {

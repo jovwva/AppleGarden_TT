@@ -10,6 +10,9 @@ public class AppleTree : MonoBehaviour
     private float spawnDelay;
     private float lastSpawnTime;
     
+    private Garden garden;
+    private bool isInitialized;
+    
     private int GetSign => Random.value > 0.5f ? 1 : -1;
     
     private void Awake()
@@ -19,6 +22,8 @@ public class AppleTree : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isInitialized) return;
+        
         lastSpawnTime += Time.fixedDeltaTime;
 
         if (lastSpawnTime >= spawnDelay)
@@ -28,9 +33,15 @@ public class AppleTree : MonoBehaviour
         }
     }
 
-    public void CreateFruit()
+    public void Initialize(Garden garden)
     {
-        Apple fruit = Instantiate(treeData.FruitSO.Prefab).GetComponent<Apple>();
+        this.garden = garden;
+        isInitialized = true;
+    }
+    
+    private void CreateFruit()
+    {
+        Apple fruit = garden.GetApple();
         
         fruit.transform.localPosition = spawnPoint.position;
         fruit.AddForce(GetDropDirection(), treeData.DropPower);

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FruitSO>k__BackingField: {fileID: 11400000, guid: 3ee79a0a327c82040a787453ba93a0fc,
     type: 2}
-  <Fruitfulness>k__BackingField: 2
+  <Fruitfulness>k__BackingField: 10
   <SpawnDelta>k__BackingField: 1
   <DropPower>k__BackingField: 3
