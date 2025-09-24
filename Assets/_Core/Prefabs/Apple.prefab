@@ -180,7 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91526473b58d2db4b93a4aeb1dec7fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitData: {fileID: 11400000, guid: 3ee79a0a327c82040a787453ba93a0fc, type: 2}
+  <FruitData>k__BackingField: {fileID: 11400000, guid: 3ee79a0a327c82040a787453ba93a0fc,
+    type: 2}
   rb: {fileID: 5718501679610732822}
   view: {fileID: 3615143290092939289}
 --- !u!1 &7322374108616291648

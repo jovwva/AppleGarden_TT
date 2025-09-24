@@ -1,19 +1,22 @@
+using System;
 using UnityEngine;
 
 public class Apple : MonoBehaviour
 {
-    [SerializeField] private FruitSO fruitData;
+    [field: SerializeField] public  FruitSO FruitData {get; private set;}
     
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform view;
-
+    
     private float lifeTime;
+    
+    public event Action<Apple> OnAppleDestroyed;
     
     private void FixedUpdate()
     {
         lifeTime += Time.fixedDeltaTime;
 
-        if (lifeTime >= fruitData.LifeTime)
+        if (lifeTime >= FruitData.LifeTime)
         {
             DestroyFruit();
         }
@@ -32,6 +35,8 @@ public class Apple : MonoBehaviour
 
     private void DestroyFruit()
     {
-        Destroy(this.gameObject);
+        Debug.Log("Destroying Fruit");
+        OnAppleDestroyed?.Invoke(this);
+        Destroy(gameObject);
     }
 }
