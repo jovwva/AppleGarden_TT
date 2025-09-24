@@ -59,13 +59,7 @@ public class Garden : MonoBehaviour
 
     private Apple CreateApple()
     {
-        Apple apple = Instantiate(appleData.Prefab).GetComponent<Apple>();
-        
-        // Организуем иерархию для чистоты в сцене
-        if (applePoolRoot != null)
-        {
-            apple.transform.SetParent(applePoolRoot);
-        }
+        Apple apple = Instantiate(appleData.Prefab, applePoolRoot).GetComponent<Apple>();
         
         apple.gameObject.SetActive(false);
         apple.OnAppleDestroyed += ReturnAppleToPool;
@@ -75,18 +69,11 @@ public class Garden : MonoBehaviour
     private void OnTakeAppleFromPool(Apple apple)
     {
         apple.gameObject.SetActive(true);
-        // apple.ResetApple();
     }
 
-    private void OnReturnAppleToPool(Apple apple)
+    private void OnReturnAppleToPool(Apple apple) 
     {
         apple.gameObject.SetActive(false);
-        
-        // Возвращаем в корень пула для организации
-        if (applePoolRoot != null)
-        {
-            apple.transform.SetParent(applePoolRoot);
-        }
     }
 
     private void OnDestroyApple(Apple apple)
