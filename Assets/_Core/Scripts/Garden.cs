@@ -4,13 +4,16 @@ using System.Collections.Generic;
 
 public class Garden : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem[] particles;
+    
     [SerializeField] private FruitSO appleData;
     [SerializeField] private int defaultPoolSize = 20;
     [SerializeField] private int maxPoolSize = 50;
     [SerializeField] private Transform applePoolRoot; // Для организации иерархии
     
     private ObjectPool<Apple> applePool;
-
+    private int lastPSIndex = 0;
+    
     private void Awake()
     {
         InitializePool();
@@ -105,5 +108,18 @@ public class Garden : MonoBehaviour
     private void ReturnAppleToPool(Apple apple)
     {
         applePool.Release(apple);
+        ShowParticle(apple.transform.localPosition);
+    }
+
+    private void ShowParticle(Vector3 position)
+    {
+        particles[lastPSIndex].transform.localPosition = position;
+        particles[lastPSIndex].Play();
+
+        lastPSIndex++;
+        if (lastPSIndex >= particles.Length)
+        {
+            lastPSIndex = 0;
+        }
     }
 }
